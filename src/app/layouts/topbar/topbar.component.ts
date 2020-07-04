@@ -1,7 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AuthenticationService } from '../../core/services/auth.service';
 
 
 @Component({
@@ -17,7 +16,7 @@ export class TopbarComponent implements OnInit {
   @Output() settingsButtonClicked = new EventEmitter();
   @Output() mobileMenuButtonClicked = new EventEmitter();
 
-  constructor(private router: Router, private authService: AuthenticationService) { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
     // get the notifications
@@ -45,7 +44,7 @@ export class TopbarComponent implements OnInit {
    * Logout the user
    */
   logout() {
-    this.authService.logout();
+   
     this.router.navigate(['/account/login']);
   }
 
