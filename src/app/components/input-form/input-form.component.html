@@ -1,0 +1,63 @@
+<div [formGroup]="formGroup">
+
+
+
+  <label *ngIf="type!='checkbox'" [for]="name">{{label}} <span [hidden]="!required" class="text-danger">*</span></label>
+  <input
+    *ngIf="type!='textarea' && type!='html' &&  type!='select'&&  type!='number' &&   type!='switch' &&  type!='checkbox' &&  type!='date'"
+    [formControlName]="name" [type]="type=='daterange'?'text':type" [id]="name" class="form-control"
+    placeholder="{{placeholder?placeholder:'Digite o '+label}}" [class.is-invalid]="submitted && f.errors"
+    data-toggle="input-mask" [mask]="mask" />
+
+  <input *ngIf="type =='number'" [formControlName]="name" type="number" [id]="name" class="form-control"
+    placeholder="{{placeholder?placeholder:'Digite o '+label}}" [class.is-invalid]="submitted && f.errors"
+    data-toggle="input-mask" />
+
+
+  <label *ngIf="type=='checkbox'">&nbsp;</label>
+  <div *ngIf="type=='checkbox'" class="custom-control custom-checkbox">
+    <input type="checkbox" [formControlName]="name" class="custom-control-input" [id]="name">
+    <label class="custom-control-label" [for]="name">{{label}}</label>
+  </div>
+
+
+  <label *ngIf="type=='switch'">&nbsp;</label>
+  <div *ngIf="type=='switch'">
+    <ui-switch class="vertical-middle" [defaultBoColor]="defaultBoColor" [formControlName]="name" [id]="name"
+      [color]="color" checked></ui-switch>
+    <label class="ml-2" [for]="name">{{f.value?'Sim':'Não'}}</label>
+  </div>
+
+
+  <textarea *ngIf="type=='textarea'" class="form-control" [formControlName]="name" [id]="name" [rows]="rows"
+    placeholder="{{placeholder?placeholder:'Digite o '+label}}" [class.is-invalid]="submitted && f.errors"></textarea>
+
+  <ng-select placeholder="{{placeholder?placeholder:'Selecione o '+label}}" (change)="emit('change')"
+    *ngIf="type=='select'" [items]="items" [formControlName]="name" [id]="name"
+    [class.is-invalid]="submitted && f.errors" [multiple]="false" bindLabel="{{selectLabel}}"
+    notFoundText="{{notFoundText}}" bindValue="{{selectId}}">
+  </ng-select>
+
+  <div *ngIf="type=='html'" class="input-group">
+    <ckeditor [formControlName]="name" [id]="name" [config]="config" [editor]="Editor">
+    </ckeditor>
+  </div>
+
+
+  <div *ngIf="type=='date'" class="input-group clockpicker">
+    <input ngbDatepicker class="form-control" [formControlName]="name" [id]="name"
+      [class.is-invalid]="submitted && f.errors" autoClose="false"
+      placeholder="{{placeholder?placeholder:'Selecione o '+label}}" #date="ngbDatepicker">
+    <div class="input-group-append" (click)="date.toggle()">
+      <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
+    </div>
+  </div>
+
+
+  <span class="font-13 text-muted">{{ex}}</span>
+  <div *ngIf="submitted && f.errors" class="invalid-feedback">
+    <div *ngIf="f.errors.required">{{label}} é obrigatório</div>
+    <div *ngIf="f.errors.cpf">{{label}} está incorreto</div>
+    <div *ngIf="f.errors.cnpj">{{label}} está incorreto</div>
+  </div>
+</div>

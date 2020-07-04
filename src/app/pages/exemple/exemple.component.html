@@ -1,0 +1,134 @@
+<div class="container-fluid">
+  <button (click)="scrollToElement(target)">link</button>
+
+
+  <app-page-title title="Input-Form v1.1.5"></app-page-title>
+  <a href="/#NOME">meu link</a>
+  <div class="row">
+    <div class="col-12">
+      <div class="card-box">
+        <div class="row">
+          <div class="col-md-4">
+            <ul class="sitemap">
+              <li><a href="javascript: void(0);" class="text-uppercase font-weight-bold"><i
+                    class="mdi mdi-adjust mr-1"></i>UBold Pages</a>
+                <ul>
+                  
+                  <li><a href="javascript: void(0);" (click)="scrollToElement(ex1)"><i class="fe-airplay mr-1"></i>1 -
+                      Instalação</a>
+                  </li>
+                  <li><a href="javascript: void(0);" (click)="scrollToElement(ex1)"><i class="fe-airplay mr-1"></i>1 -
+                    Instalação</a>
+                </li>
+                  <li><a href="javascript: void(0);" (click)="scrollToElement(ex1)"><i class="fe-airplay mr-1"></i>1 -
+                      Instalação</a>
+                    <ul>
+                      <li><a href="#habilite-gzip">#1 - Habilite GZIP</a></li>
+                      <li><a href="javascript: void(0);">Analytics</a></li>
+                      <li><a href="javascript: void(0);">Minimal</a></li>
+                      <li><a href="javascript: void(0);">eCommerce</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-6">
+            <div>
+              <h3 #ex1>1 - Instalação</h3>
+              <p>Baixar no link o componente e:</p>
+              <ol>
+                <li>Abrir o ".module.ts" onde o componete vai ser utilizado</li>
+                <li>Na propriedade "imports" adicionar a referência a "InputFormModule,ReactiveFormsModule"</li>
+                <li>Na propriedade "exports" adicionar a referência a "InputFormComponent"</li>
+              </ol>
+            </div>
+            <div>
+              <h3>2 - Uso simples</h3>
+              <p>Baixar no link o componente e:</p>
+              <ol>
+                <li>
+                  html
+                  <p>
+                    <textarea rows="4" disabled>
+                    <form class="needs-validation" [formGroup]="formSimple" (ngSubmit)="onSubmit1()" novalidate>
+                      <div class="row">
+                        <div class="col-6 form-group mb-3">
+                          <input-form label='Nome' name='name' [submitted]='submittedSimple' [formGroup]="formSimple">
+                          </input-form>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-12">
+                          <div class="text-right mb-3">
+                            <button type="submit" class="btn btn-blue block waves-effect waves-ligh"
+                              [disabled]="submitting">
+                              <span class="spinner-grow spinner-grow-sm mr-1" *ngIf="submittingSimple"></span>
+                              Salvar
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                      
+                  </textarea>
+                  </p>
+                </li>
+                <li>
+                  ts
+                  <p>
+                    <textarea rows="4" disabled>
+                    formSimple: FormGroup;
+                    submittedSimple = false;
+                    submittingSimple = false;
+                    constructor(
+                      private formBuilder: FormBuilder,
+                    ) { }
+                  
+                    ngOnInit() {
+                      this.formSimple = this.formBuilder.group({
+                        name: ['', [Validators.required]],
+                      });
+                    }
+                    onSubmit1() {
+                      this.submittedSimple = true;
+                      if (this.formSimple.invalid) {
+                        return;
+                      }
+                      this.submittingSimple = true;
+                    }
+                  </textarea>
+                  </p>
+                </li>
+              </ol>
+
+
+              <form class="needs-validation" [formGroup]="formSimple" (ngSubmit)="onSubmit1()" novalidate>
+                <div class="row">
+                  <div class="col-6 form-group mb-3">
+                    <input-form label='Nome' name='name' [submitted]='submittedSimple' [formGroup]="formSimple">
+                    </input-form>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                    <div class="text-right mb-3">
+                      <button type="submit" class="btn btn-blue block waves-effect waves-ligh" [disabled]="submitting">
+                        <span class="spinner-grow spinner-grow-sm mr-1" *ngIf="submittingSimple"></span>
+                        Salvar
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+              <h3 id="habilite-gzip">#1 - Habilite GZIP</h3>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="NOME" nome="NOME"></div>
+  <div #target>Your target</div>
+</div>
