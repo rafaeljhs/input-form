@@ -28,11 +28,21 @@ export class InputFormComponent implements OnInit, AfterViewInit {
   @Input() type = 'string';
   @Input() rows = 1;
 
-  @Input() items: any[];
-  @Input() selectLabel = 'text';
-  @Input() selectId = 'id';
-  @Input() notFoundText = 'id';
+
+  @Input() multiple = false;
+  @Input() tag = false;
   @Input() step: string = null;
+  @Input() items: any[];
+  @Input() selectLabel = 'name';
+  @Input() selectId = 'id';
+  @Input() notFoundText = 'Itens não encontrados';
+
+
+
+  @Input() dateFormat: string = "d-m-Y";
+  @Input() minDate: string = null;
+  @Input() maxDate: string = null;
+
 
 
 
@@ -45,30 +55,13 @@ export class InputFormComponent implements OnInit, AfterViewInit {
   //html
   public Editor = ClassicEditor;
 
-  public dateOfBirth: { year: number; month: number; day: number };
-
   public currentDate = moment().format("YYYY-MM-DD");
 
   constructor(
-    private config: NgbDatepickerConfig
   ) {
 
-
-    if (this.type == 'date') {
-      const currentDate = new Date();
-      const day = currentDate.getDate();
-      const month = currentDate.getMonth() + 1;
-      const year = currentDate.getFullYear();
-      this.config.minDate = { year: 1900, month: 1, day: 1 };
-      this.config.maxDate = { year, month, day };
-      this.config.outsideDays = "hidden";
-    }
-    if (this.type == 'date') {
-    }
-
-
   }
-
+  addCustomUser = (term) => (this.tag ? { id: term, name: term } : null);
   get f() {
     return this.formGroup.controls[this.name];
   }
@@ -77,8 +70,20 @@ export class InputFormComponent implements OnInit, AfterViewInit {
       setTimeout(() => {
         flatpickr('#' + this.name, {
           mode: "range",
+          minDate: this.minDate,
+          maxDate: this.maxDate,
           locale: "pt",
-          dateFormat: "d-m-Y"
+          dateFormat: this.dateFormat
+        });
+      }, 200);
+    }
+    if (this.type == 'date') {
+      setTimeout(() => {
+        flatpickr('#' + this.name, {
+          locale: "pt",
+          minDate: this.minDate,
+          maxDate: this.maxDate,
+          dateFormat: this.dateFormat
         });
       }, 200);
     }

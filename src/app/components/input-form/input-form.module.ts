@@ -7,7 +7,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NgxMaskModule } from 'ngx-mask';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgbDatepickerModule, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
-import { NgbDateCustomParserFormatter } from './ngbDateCustomParserFormatter.service';
 import { UiSwitchModule } from 'ngx-ui-switch';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
@@ -25,9 +24,7 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     NgxMaskModule.forRoot()
   ],
   declarations: [InputFormComponent],
-  exports: [InputFormComponent],
-  providers: [
-    { provide: NgbDateParserFormatter, useClass: NgbDateCustomParserFormatter }
-  ]
+  exports: [InputFormComponent]
+ 
 })
 export class InputFormModule { }
