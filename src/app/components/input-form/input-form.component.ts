@@ -44,13 +44,12 @@ export class InputFormComponent implements OnInit, AfterViewInit {
   @Input() maxDate: string = null;
 
 
-
-
   required = false;
 
   @Output() onfocusout = new EventEmitter();
   @Output() change = new EventEmitter();
-
+  @Output() keyup = new EventEmitter();
+  
 
   //html
   public Editor = ClassicEditor;
@@ -111,10 +110,15 @@ export class InputFormComponent implements OnInit, AfterViewInit {
         item.setAttribute('disabled', 'true');
       }
     }
-    if (this.onfocusout && item) {
-      // tslint:disable-next-line: only-arrow-functions
+    	
+	 if (this.onfocusout && item) {
       item.addEventListener('focusout', function () {
         thit.emit('onfocusout');
+      });
+    }
+    if (this.keyup && item) {
+      item.addEventListener('keyup', function () {
+        thit.keyup.emit(item);
       });
     }
   }
