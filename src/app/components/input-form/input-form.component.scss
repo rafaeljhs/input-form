@@ -5,3 +5,16 @@
 ckeditor{
   width: 100%;
 }
+
+
+.ng-select .is-invalid .ng-select-container{
+  border-color: #f1556c !important; 
+}
+ng-select.is-invalid {
+  .ng-select.ng-select-opened.ng-select-bottom>.ng-select-container{
+    border-color: #f1556c;
+
+  }
+  // padding-right: calc(1.5em + 0.9rem);
+ 
+}

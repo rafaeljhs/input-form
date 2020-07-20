@@ -3,7 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
-import * as moment from 'moment';
+// import * as moment from 'moment';
 // import flatpickr from "flatpickr";
 declare var flatpickr
 
@@ -39,28 +39,38 @@ export class InputFormComponent implements OnInit, AfterViewInit {
 
 
 
-  @Input() dateFormat: string = "d-m-Y";
+  @Input() dateFormat: string = "d/m/Y";
   @Input() minDate: string = null;
   @Input() maxDate: string = null;
 
+
+  componentcolor="#ffffff";
 
   required = false;
 
   @Output() onfocusout = new EventEmitter();
   @Output() change = new EventEmitter();
   @Output() keyup = new EventEmitter();
-  
+
 
   //html
   public Editor = ClassicEditor;
 
-  public currentDate = moment().format("YYYY-MM-DD");
+  // public currentDate = moment().format("YYYY-MM-DD");
 
   constructor(
   ) {
 
   }
-  addCustomUser = (term) => (this.tag ? { id: term, name: term } : null);
+  colorChange(){
+    this.f.setValue(this.componentcolor);
+  }
+  addTagFn(name) {
+    return { name: name, tag: true };
+  }
+  addCustomUser = (term) => {
+    return this.tag ? { id: term, name: term } : null
+  };
   get f() {
     return this.formGroup.controls[this.name];
   }
@@ -91,6 +101,9 @@ export class InputFormComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     setTimeout(() => {
       this.required = this.f && this.f.errors && this.f.errors.required === true;
+      if(this.f.value){
+        this.componentcolor= this.f.value;
+      }
     }, 500);
 
     const item = document.getElementById(this.name) as HTMLInputElement;
@@ -110,8 +123,7 @@ export class InputFormComponent implements OnInit, AfterViewInit {
         item.setAttribute('disabled', 'true');
       }
     }
-    	
-	 if (this.onfocusout && item) {
+    if (this.onfocusout && item) {
       item.addEventListener('focusout', function () {
         thit.emit('onfocusout');
       });

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-
 @Component({
   selector: 'app-exemple',
   templateUrl: './exemple.component.html',
@@ -38,6 +37,11 @@ export class ExempleComponent implements OnInit {
       ex5: [null, [Validators.required]],
       ex6: ['', [Validators.required]],
       ex7: ['', [Validators.required]],
+      ex8: ['', [Validators.required]],
+      ex9: [false, [Validators.required]],
+      ex10: ['', [Validators.required]],
+      ex11: ['', [Validators.required]],
+      ex12: ['', [Validators.required]],
     });
   }
   onSubmit() {

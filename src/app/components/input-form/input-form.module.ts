@@ -9,6 +9,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { NgbDatepickerModule, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { UiSwitchModule } from 'ngx-ui-switch';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { ColorPickerModule } from 'ngx-color-picker';
 
 
 @NgModule({
@@ -19,12 +20,12 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     NgSelectModule,
     NgbDatepickerModule,
     UiSwitchModule,
-	    CKEditorModule,
-
+    CKEditorModule,
+    ColorPickerModule,
     NgxMaskModule.forRoot()
   ],
   declarations: [InputFormComponent],
   exports: [InputFormComponent]
- 
+
 })
 export class InputFormModule { }
