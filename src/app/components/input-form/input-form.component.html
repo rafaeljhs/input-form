@@ -31,7 +31,7 @@
   </div>
 
 
-  <label *ngIf="type=='switch'">&nbsp;</label>
+  <!-- <label *ngIf="type=='switch'">&nbsp;</label> -->
   <div *ngIf="type=='switch'">
     <ui-switch class="vertical-middle" [defaultBoColor]="defaultBoColor" [formControlName]="name" [id]="name"
       [color]="color" checked></ui-switch>
@@ -54,7 +54,7 @@
     </ckeditor>
   </div>
 
-  <span class="font-13 text-muted">{{ex}}</span>
+  <span class="font-10 text-muted">{{ex}}</span>
   <div *ngIf="submitted && f.errors" class="invalid-feedback">
     <div *ngIf="f.errors.required">{{label}} é obrigatório</div>
     <div *ngIf="f.errors.cpf">{{label}} está incorreto</div>
@@ -65,8 +65,8 @@
     <div *ngIf="f.errors.min">Valor mínimo {{f.errors.min.min}}, atual {{f.errors.min.actual}} </div>
   </div>
 
-  <span class="font-13 text-muted">
+  <!-- <span class="font-13 text-muted">
     value: {{f.value}}
-  </span>
+  </span> -->
 
 </div>

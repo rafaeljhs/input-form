@@ -196,6 +196,43 @@
                 <p>Blibioteca utilizada:<a href="https://flatpickr.js.org/"> flatpickr</a><br>
                   Atributos implementados "minDate", "maxDate", "dateFormat"
                 </p>
+                <table>
+                  <tr>
+                    <th>
+                      Atributo
+                    </th>
+                    <th>
+                      Valor padrão
+                    </th>
+                    <th>
+                     Exemplo
+                    </th>
+                  </tr>
+                  <tr>
+                    <td>minDate</td>
+                    <td>null </td>
+                    <td>"2020-01"-"today" - new Date().fp_incr(14) // 14 days from now </td>
+                  </tr>
+                  <tr>
+                    <td>maxDate</td>
+                    <td>null</td>
+                    <td>"2020-01"-"today" - new Date().fp_incr(14) // 14 days from now </td>
+
+                  </tr>
+                  <tr>
+                    <td>dateFormat</td>
+                    <td>"d/m/Y"</td>
+                    <td>"d/m/Y"-"Y/m/d"-"d.m.Y"-"H:i"</td>
+                  </tr>
+                  <tr>
+                    <td>altFormat</td>
+                    <td>"d/m/Y"</td>
+                    <td>"d/m/Y"-"Y/m/d"-"d.m.Y"-"H:i"</td>
+                  </tr>
+                  
+                
+
+                </table>
                 <div class="row">
                   <div class="col-6 form-group mb-3">
                     <input-form type="date" label='Date' name='ex1' [submitted]='submitted' [formGroup]="formGroup">

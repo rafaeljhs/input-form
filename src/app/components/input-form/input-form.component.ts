@@ -40,11 +40,17 @@ export class InputFormComponent implements OnInit, AfterViewInit {
 
 
   @Input() dateFormat: string = "d/m/Y";
+  @Input() altFormat: string = "d/m/Y";
+
   @Input() minDate: string = null;
   @Input() maxDate: string = null;
 
+  @Input() minTime: string = null;
+  @Input() maxTime: string = null;
+  @Input() enableDays: string[] = [];
 
-  componentcolor="#ffffff";
+
+  componentcolor = "#ffffff";
 
   required = false;
 
@@ -62,14 +68,19 @@ export class InputFormComponent implements OnInit, AfterViewInit {
   ) {
 
   }
-  colorChange(){
+  colorChange() {
     this.f.setValue(this.componentcolor);
   }
   addTagFn(name) {
     return { name: name, tag: true };
   }
   addCustomUser = (term) => {
-    return this.tag ? { id: term, name: term } : null
+    let aux = {};
+    if (this.tag) {
+      aux[this.selectId] = term;
+      aux[this.selectLabel] = term;
+    }
+    return this.tag ? aux : null
   };
   get f() {
     return this.formGroup.controls[this.name];
@@ -81,6 +92,9 @@ export class InputFormComponent implements OnInit, AfterViewInit {
           mode: "range",
           minDate: this.minDate,
           maxDate: this.maxDate,
+          altInput: true,
+          enable: this.enableDays,
+          altFormat: this.altFormat,
           locale: "pt",
           dateFormat: this.dateFormat
         });
@@ -90,19 +104,34 @@ export class InputFormComponent implements OnInit, AfterViewInit {
       setTimeout(() => {
         flatpickr('#' + this.name, {
           locale: "pt",
+          altInput: true,
           minDate: this.minDate,
           maxDate: this.maxDate,
+          enable: this.enableDays,
+          altFormat: this.altFormat,
           dateFormat: this.dateFormat
         });
       }, 200);
     }
+    // if (this.type == 'time') {
+    //   setTimeout(() => {
+    //     flatpickr('#' + this.name, {
+    //       locale: "pt",
+    //       enableTime: true,
+    //       noCalendar: true,
+    //       dateFormat: "H:i",
+    //       minTime: this.minTime,
+    //       maxTime: this.maxTime,
+    //     });
+    //   }, 200);
+    // }
   }
 
   ngAfterViewInit() {
     setTimeout(() => {
       this.required = this.f && this.f.errors && this.f.errors.required === true;
-      if(this.f.value){
-        this.componentcolor= this.f.value;
+      if (this.f.value) {
+        this.componentcolor = this.f.value;
       }
     }, 500);
 
@@ -115,13 +144,18 @@ export class InputFormComponent implements OnInit, AfterViewInit {
     if (this.disabled) {
       if (this.type == 'select') {
         this.type = 'text';
+        let texts = document.getElementById(this.name).childNodes[0].childNodes[0]['innerText'] + '';
+        // texts = texts.substr(0, texts.length - 2);
         setTimeout(() => {
           const item = document.getElementById(this.name) as HTMLInputElement;
           item.setAttribute('disabled', 'true');
-        }, 500);
+          item.value = texts;
+        }, 100);
       } else {
         item.setAttribute('disabled', 'true');
       }
+
+      item.setAttribute('disabled', 'true');
     }
     if (this.onfocusout && item) {
       item.addEventListener('focusout', function () {
